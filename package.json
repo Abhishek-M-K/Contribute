@@ -1,0 +1,49 @@
+{
+  "name": "contribute-api",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun --filter '*' dev",
+    "start": "bun --filter '*' start",
+    "build": "turbo build",
+    "start:platform": "bun --filter './apps/platform' start",
+    "dev:platform": "bun --filter './apps/platform' dev",
+    "db:studio": "bun --filter './packages/database' db:studio",
+    "db:generate": "bun --filter './packages/database' db:generate",
+    "db:push": "bun --filter './packages/database' db:push",
+    "db:seed": "bun --filter './packages/database' db:seed",
+    "db:migrate:live": "bun --filter './packages/database' db:migrate:live",
+    "db:migrate:dev": "bun --filter './packages/database' db:migrate:dev",
+    "postinstall": "bun db:generate"
+  },
+  "trustedDependencies": [
+    "@contribute-api/database",
+    "@prisma/client",
+    "@prisma/engines",
+    "prisma"
+  ],
+  "devDependencies": {
+    "@contribute-api/database": "workspace:*",
+    "prettier": "^3.2.5",
+    "turbo": "^2.3.3",
+    "typescript": "5.5.4"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "module": "src/index.js",
+  "packageManager": "bun@1.1.34",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@elysiajs/bearer": "^1.2.0",
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/swagger": "^1.2.0",
+    "@prisma/client": "^6.1.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
+    "elysia": "^1.2.6"
+  }
+}
