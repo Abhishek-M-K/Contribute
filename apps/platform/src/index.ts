@@ -24,6 +24,9 @@ export const platform = new Elysia({
     })
   )
   .get("/", () => "Hello from Abhishek 👋 ")
+  .post("/auth/github", ({body}:any)=>{
+    console.log("Github Auth Body:", body);
+  })
   .listen(8888);
 
 console.log(

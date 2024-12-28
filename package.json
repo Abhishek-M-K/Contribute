@@ -16,18 +16,6 @@
     "db:migrate:dev": "bun --filter './packages/database' db:migrate:dev",
     "postinstall": "bun db:generate"
   },
-  "trustedDependencies": [
-    "@contribute-api/database",
-    "@prisma/client",
-    "@prisma/engines",
-    "prisma"
-  ],
-  "devDependencies": {
-    "@contribute-api/database": "workspace:*",
-    "prettier": "^3.2.5",
-    "turbo": "^2.3.3",
-    "typescript": "5.5.4"
-  },
   "engines": {
     "node": ">=18"
   },
@@ -37,6 +25,24 @@
     "apps/*",
     "packages/*"
   ],
+  "trustedDependencies": [
+    "@contribute-api/database",
+    "@repo/eslint-config",
+    "@repo/typescript-config",
+    "@repo/ui",
+    "@prisma/client",
+    "@prisma/engines",
+    "prisma"
+  ],
+  "devDependencies": {
+    "@contribute-api/database": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "prettier": "^3.4.2",
+    "turbo": "^2.3.3",
+    "typescript": "5.5.4"
+  },
   "dependencies": {
     "@elysiajs/bearer": "^1.2.0",
     "@elysiajs/cors": "^1.2.0",
@@ -44,6 +50,7 @@
     "@prisma/client": "^6.1.0",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
-    "elysia": "^1.2.6"
+    "elysia": "^1.2.6",
+    "tailwindcss": "^3.4.17"
   }
 }
