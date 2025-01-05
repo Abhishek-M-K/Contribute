@@ -1,0 +1,61 @@
+model Post {
+    id           String           @id @default(uuid())
+    title        String
+    desc         String?
+    content      String?
+    status       PostStatus       @default(DRAFT)
+    reviewStatus PostReviewStatus @default(PLANNED)
+    authorId     String
+    author       User             @relation(fields: [authorId], references: [id])
+    upvotes      Upvotes[]
+    createdAt    DateTime         @default(now())
+    updatedAt    DateTime         @updatedAt
+    comments     Comment[]
+
+    @@index([authorId])
+}
+
+model Upvotes {
+    id     String @id @default(uuid())
+    postId String
+    userId String
+    post   Post   @relation(fields: [postId], references: [id])
+    user   User   @relation(fields: [userId], references: [id])
+
+    @@index([postId])
+    @@index([userId])
+}
+
+model Comment {
+    id        String  @id @default(uuid())
+    text      String
+    userId    String
+    postId    String
+    isReply   Boolean @default(false)
+    repliedTo String?
+
+    user    User      @relation(fields: [userId], references: [id])
+    post    Post      @relation(fields: [postId], references: [id])
+    replyTo Comment?  @relation("CommentToReply", fields: [repliedTo], references: [id])
+    replies Comment[] @relation("CommentToReply")
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([postId])
+    @@index([userId])
+    @@index([repliedTo])
+}
+
+enum PostStatus {
+    DRAFT
+    PUBLISHED
+    ARCHIVED
+}
+
+enum PostReviewStatus {
+    PLANNED
+    PROGRESS
+    REVIEW
+    COMPLETED
+}

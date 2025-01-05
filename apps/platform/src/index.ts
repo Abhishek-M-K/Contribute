@@ -1,13 +1,14 @@
 import { Elysia } from "elysia";
 import swagger from "@elysiajs/swagger";
 import { cors } from "@elysiajs/cors";
+import { RouteTable } from "./routes/routeTable";
 
 export const platform = new Elysia({
   name: "platform",
 })
   .use(
     cors({
-      methods: ["GET", "POST", "PUT", "DELETE"],
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
       origin: "*", // Allow all origins
     })
   )
@@ -24,9 +25,10 @@ export const platform = new Elysia({
     })
   )
   .get("/", () => "Hello from Abhishek 👋 ")
-  .post("/auth/github", ({body}:any)=>{
+  .post("/auth/github", ({ body }: any) => {
     console.log("Github Auth Body:", body);
   })
+  .use(RouteTable)
   .listen(8888);
 
 console.log(
